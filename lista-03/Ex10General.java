@@ -8,7 +8,7 @@ public class Ex10General {
         int maxRows;
         do {
             System.out.print("Informe um número de linhas (PAR): ");
-            maxRows = input.nextShort();    
+            maxRows = input.nextInt();    
         } while (maxRows % 2 != 0);
 
         /* an = a1 + (n-1)2
