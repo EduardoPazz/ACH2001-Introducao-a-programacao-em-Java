@@ -1,0 +1,3 @@
+O Array é mais útil para poucas consultas porque ele não necessita de uma ordenação prévia. Ao passo que o Array2 se torna útil para muitas consultas porque seus elementos já estão ordenados.
+
+De forma análoga, o Array não é tão útil para muitas consultas porque seus elementos não estão ordenados. E Array2 não e útil para poucas consultas porque o processamento de ordenar os elementos previamente não provê vantagem neste caso.
