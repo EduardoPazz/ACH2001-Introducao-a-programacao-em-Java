@@ -1,7 +1,7 @@
 package ex01;
 
 public class LinkedList {
-    private int length = 0;
+    protected int length;
     public Node head;
 
     public int length() {
@@ -49,16 +49,53 @@ public class LinkedList {
             Node jumper = this.head;
             jumper != null;
             jumper = jumper.pointer
-        ) {System.out.println(jumper.atr);}
+        ) System.out.println(jumper.atr);
     }
+
+    public void reverse() throws NullPointerException { // Referente ao Ex04
+        Node j = this.head;
+        try {
+            Node jj = j.pointer;
+            Node jjj = jj.pointer;
+            while (jj != null) {
+                jj.pointer = j;
+                j = jj;
+                jj = jjj;
+                jjj = jjj.pointer;
+            }      
+        } catch (NullPointerException e) {} finally {
+            this.head.pointer = null;
+            this.head = j;
+        }
+    }
+
+    public Object get(int index) {
+        if (0 <= index && index < this.length) {
+            Node jumper = this.head;
+            for (int i = 0; i < index; i++) {
+                jumper = jumper.pointer;
+            }
+            return jumper.atr;            
+        }
+        return null;
+    }
+
+    public void concat(LinkedList append) {
+        Node last = this.head;
+        while (last.pointer != null) {
+            last = last.pointer;
+        }
+        last.pointer = append.head;
+    } 
 
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
 
-        ll.insert("three", 0);
-        ll.insert(0, 0);
-        ll.insert(0.458, 0);
+        ll.insert("one", 0);
+        ll.insert("two", 1);
+        ll.insert("three", 2);
 
+    
         ll.print();
     }
 }
