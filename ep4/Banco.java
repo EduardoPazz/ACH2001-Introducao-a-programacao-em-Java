@@ -1,13 +1,13 @@
 /*********************************************************************/
 /**   ACH2001 - Introdução à Programação                            **/
 /**   EACH-USP - Primeiro Semestre de 2020                          **/
-/**   <turma> - <nome do professor>                                 **/
+/**   2020194 - Norton Trevisan Roman                               **/
 /**                                                                 **/
 /**   Quarto Exercício-Programa                                     **/
 /**                                                                 **/
-/**   <nome do(a) aluno(a)>                   <número USP>          **/
+/**   João Eduardo da Paz                   11845514                **/
 /**                                                                 **/
-/**   <data de entrega>                                             **/
+/**   15/06/2020                                                    **/
 /*********************************************************************/
 
 public class Banco {
@@ -17,7 +17,7 @@ public class Banco {
 	/* Construtor da Classe Banco
 	 * Inicializa os dois atributos do objeto que esta sendo instanciado.
 	 */
-	Banco(){
+	Banco() {
 		gerentes = new Gerente[10];
 		numGerentes = 0;
 	}
@@ -55,6 +55,13 @@ public class Banco {
 
 		// Testa um cliente já existente
 		for (Gerente gerenteTeste : gerentes) {
+			/*
+			 * Assim que algum gerenteTeste for null, quer dizer
+			 * que desta posição e adiante não há mais nenhum gerente
+			 * cadastrado, o que valida a inserção de um novo
+			*/ 
+			if (gerenteTeste == null) break;
+
 			if (gerenteTeste.cpf == gerente.cpf) return false;
 		}
 

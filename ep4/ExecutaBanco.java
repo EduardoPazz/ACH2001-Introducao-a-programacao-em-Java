@@ -118,8 +118,6 @@ public class ExecutaBanco {
 		
 		
 		System.out.println("\nATENCAO: Nem todas as caracteristicas do enunciado sao testadas neste exemplo.");
-		System.out.println("         Cabe a cada aluno testar cuidadosamente seu EP.\n");
-		
-		
+		System.out.println("         Cabe a cada aluno testar cuidadosamente seu EP.\n");	
 	}
 }

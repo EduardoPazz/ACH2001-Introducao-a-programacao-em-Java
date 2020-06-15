@@ -1,4 +1,3 @@
-
 public class Gerente extends Pessoa implements InterfaceGerente{
 	private static final String tipo = "G";
 	private Cliente[] clientes;
@@ -48,6 +47,13 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 
 		// Testa um cliente já existente
 		for (Cliente clienteTeste : clientes) {
+			/*
+			 * Assim que algum clienteTeste for null, quer dizer
+			 * que desta posição e adiante não há mais nenhum cliente
+			 * cadastrado, o que valida a inserção de um novo
+			*/ 
+			if (clienteTeste == null) break;
+
 			if (clienteTeste.cpf == cliente.cpf) return false;
 		}
 
@@ -71,12 +77,19 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 	 */
 	public void cobrarTodosEmprestimos() {
 		for (Cliente cliente : clientes) {
+			/*
+			 * Assim que algum cliente for null, quer dizer
+			 * que desta posição e adiante não há mais nenhum cliente
+			 * cadastrado, o que marca o fim do loop.
+			*/
+			if (cliente == null) return;
+			
 			if (cliente.getValorDaDivida() == 0) continue;
 
 			// A partir daqui, apenas clientes com dívidas
 
 			if (cliente.getValorContaCorrente() > cliente.getValorDaDivida()) {
-				// Clientes que podem pagar a dívida inteira
+				// Neste bloco, clientes que podem pagar a dívida inteira
 
 				int debito = (
 					cliente.getValorContaCorrente() - 
@@ -87,8 +100,8 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 
 				cliente.setValorDaDivida(0);
 			} else {
-				// Clientes que podem apenas pagar parte da dívida e
-				// terão sua conta zerada
+				// Neste bloco, clientes que podem apenas pagar 
+				// parte da dívida e terão sua conta zerada.
 
 				int debito = (
 					cliente.getValorDaDivida() -
