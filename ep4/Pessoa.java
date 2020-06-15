@@ -9,5 +9,4 @@ public abstract class Pessoa {
 	}
 	
 	abstract String retornaTipo();
-	
 }

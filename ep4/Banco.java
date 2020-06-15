@@ -50,10 +50,17 @@ public class Banco {
 	 *       incrementado em 1 e o metodo deve retornar true. 
 	 */
 	boolean adicionarGerente(Gerente gerente){
-		
-		// TODO implemente seu codigo aqui
-		
-		return false;
+		// Testa o limite de gerentes
+		if (numGerentes == 10) return false;
+
+		// Testa um cliente já existente
+		for (Gerente gerenteTeste : gerentes) {
+			if (gerenteTeste.cpf == gerente.cpf) return false;
+		}
+
+		gerentes[numGerentes++] = gerente;
+
+		return true;
 	}
 	
 }

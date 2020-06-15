@@ -47,10 +47,17 @@ public class Cliente extends Pessoa implements InterfaceCliente{
 	 *         valorContaCorrente deve ser incrementado em valor e o metodo deve retornar true
 	 */
 	public boolean obterEmprestimo(int valor) {
-		
-		//TODO implemente seu codigo aqui
-		
-		return false;
+		if (valor <= 0) return false;
+
+		if (getValorDaDivida() + valor > dividaMaxima) return false;
+
+		int incrementoDivida = valor + getValorDaDivida();
+		int incrementoContaCorrente = valor + getValorContaCorrente();
+
+		setValorDaDivida(incrementoDivida);
+		setValorContaCorrente(incrementoContaCorrente);
+
+		return true;
 	}
 	
 
@@ -63,10 +70,20 @@ public class Cliente extends Pessoa implements InterfaceCliente{
 	 *         valorContaCorrente deve ser decrementado em valor e o metodo deve retornar true
 	 */
 	public boolean pagarEmprestimo(int valor) {
-		
-		//TODO implemente seu codigo aqui
-		
-		return false;
+		if (valor <= 0) return false;
+
+		if (
+			valor > getValorDaDivida() ||
+			valor > getValorContaCorrente()
+		) return false;
+
+		int pagamento = getValorDaDivida() - valor;
+		int debito = getValorContaCorrente() - valor;
+
+		setValorDaDivida(pagamento);
+		setValorContaCorrente(debito);
+
+		return true;
 	}
 	
 	
@@ -74,10 +91,7 @@ public class Cliente extends Pessoa implements InterfaceCliente{
 	 * Caso contrario, retorna false.
 	 */
 	public boolean negativado() {
-		
-		//TODO implemente seu codigo aqui
-		
-		return false;
+		return getValorContaCorrente() < getValorDaDivida();
 	}
 	
 
@@ -90,9 +104,14 @@ public class Cliente extends Pessoa implements InterfaceCliente{
 	 *         metodo deve retornar true
 	 */
 	public boolean realizarSaque(int valor) {
-		
-		//TODO implemente seu codigo aqui
-		
-		return false;
+		if (valor <= 0) return false;
+
+		if (valor > getValorContaCorrente()) return false;
+
+		int saque = getValorContaCorrente() - valor;
+
+		setValorContaCorrente(saque);
+
+		return true;
 	}
 }

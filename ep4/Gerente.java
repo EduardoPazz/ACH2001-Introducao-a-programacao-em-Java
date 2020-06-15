@@ -26,7 +26,7 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 	void imprimirClientes(){
 		Cliente atual;
 		System.out.println("\tNumero de clientes: " + numClientes);
-		for (int c=0; c < numClientes; c++){
+		for (int c = 0; c < numClientes; c++){
 			atual = clientes[c];
 			System.out.println("\t" + (c+1) + "\t" + atual.retornaTipo() + "\t" + atual.nome + "\t" + atual.cpf + "\t" + atual.getValorContaCorrente() + "\t" + atual.getValorDaDivida() + "\t" + atual.negativado());
 		}
@@ -43,10 +43,17 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 	 *       incrementado em 1 e o metodo deve retornar true. 
 	 */
 	public boolean adicionarCliente(Cliente cliente) {
+		// Testa o limite de clientes
+		if (numClientes == 20) return false;
 
-		// TODO implemente seu codigo aqui
+		// Testa um cliente já existente
+		for (Cliente clienteTeste : clientes) {
+			if (clienteTeste.cpf == cliente.cpf) return false;
+		}
 
-		return false;
+		clientes[numClientes++] = cliente;
+
+		return true;
 	}
 
 	
@@ -63,9 +70,36 @@ public class Gerente extends Pessoa implements InterfaceGerente{
 	 *         o valorContaCorrente sera zerado.
 	 */
 	public void cobrarTodosEmprestimos() {
-			
-		//TODO implemente seu codigo aqui
+		for (Cliente cliente : clientes) {
+			if (cliente.getValorDaDivida() == 0) continue;
 
+			// A partir daqui, apenas clientes com dívidas
+
+			if (cliente.getValorContaCorrente() > cliente.getValorDaDivida()) {
+				// Clientes que podem pagar a dívida inteira
+
+				int debito = (
+					cliente.getValorContaCorrente() - 
+					cliente.getValorDaDivida()
+				);
+
+				cliente.setValorContaCorrente(debito);
+
+				cliente.setValorDaDivida(0);
+			} else {
+				// Clientes que podem apenas pagar parte da dívida e
+				// terão sua conta zerada
+
+				int debito = (
+					cliente.getValorDaDivida() -
+					cliente.getValorContaCorrente()
+				);
+
+				cliente.setValorDaDivida(debito);
+
+				cliente.setValorContaCorrente(0);
+			}
+		}
 	}
 
 
