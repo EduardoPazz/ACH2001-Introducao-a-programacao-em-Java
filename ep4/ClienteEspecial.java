@@ -32,7 +32,7 @@ public class ClienteEspecial extends Cliente{
 		setValorDaDivida(incrementoDivida);
 		setValorContaCorrente(incrementoContaCorrente);
 
-		return true;		
+		return true;	
 	}
 	
 }
